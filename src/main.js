@@ -12,7 +12,7 @@ export const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 300,
 });
-const loader = document.querySelector('.loader-icon');
+const loader = document.querySelector('.loader');
 loader.style.display = 'none';
 export const showLoaderIcon = () => {
   loader.style.display = 'flex';

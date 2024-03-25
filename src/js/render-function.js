@@ -19,7 +19,7 @@ export function renderImages(array) {
     const markup = array
       .map(image => {
         return `<li class="image-item">
-          <a class="image-link" href="${photo.largeImageURL}">
+          <a class="image-link" href="${image.largeImageURL}">
           <img class="image" src="${image.webformatURL}" alt="${image.tags}" />
           </a>
           <ul class="image-information-box">
