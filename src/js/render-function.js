@@ -13,7 +13,6 @@ export function renderImages(array) {
       backgroundColor: '#ef4040',
       titleColor: '#fff',
       messageColor: '#fff',
-      close: false,
     });
   } else {
     const markup = array
