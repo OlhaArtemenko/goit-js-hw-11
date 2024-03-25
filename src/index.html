@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home work 10</title>
+    <title>Home work 11</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,14 +13,18 @@
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <ul class="nav-list">
-      <li class="nav-item">
-        <a href="./1-timer.html" class="nav-link">Timer</a>
-      </li>
-
-      <li class="nav-item">
-        <a href="./2-snackbar.html" class="nav-link">Snackbar</a>
-      </li>
-    </ul>
+    <form class="search-form">
+      <input
+        id="search-input"
+        class="search-input-holder"
+        type="text"
+        name="search-holder"
+        placeholder="Search images..."
+      />
+      <button class="search-btn" type="submit">Search</button>
+    </form>
+    <div class="loader-icon"></div>
+    <ul class="gallery"></ul>
+    <script type="module" src="./main.js"></script>
   </body>
 </html>
