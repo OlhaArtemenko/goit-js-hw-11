@@ -46,7 +46,6 @@ function searchImages(event) {
             backgroundColor: '#ef4040',
             titleColor: '#fff',
             messageColor: '#fff',
-            close: false,
           });
         });
     };
