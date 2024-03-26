@@ -1,3 +1,5 @@
+import { inputSearch, showLoaderIcon } from '../main';
+
 export function fetchImagesFromPixabay() {
   const valueFromInput = inputSearch.value.trim().split(',').join('+');
   const searchParams = new URLSearchParams({
@@ -7,6 +9,8 @@ export function fetchImagesFromPixabay() {
     orientation: 'horizontal',
     safesearch: true,
   });
+
+  showLoaderIcon();
 
   return fetch(`https://pixabay.com/api/?${searchParams}`).then(response => {
     if (!response.ok) {
