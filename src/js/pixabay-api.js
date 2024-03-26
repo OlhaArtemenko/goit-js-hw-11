@@ -1,18 +1,16 @@
-import { inputSearch, showLoaderIcon } from '../main';
-
-export function fetchImagesFromPixabay() {
-  const valueFromInput = inputSearch.value.trim().split(',').join('+');
-  const searchParams = new URLSearchParams({
+export function fetchImagesFromPixabay(query) {
+  const BASE_URL = 'https://pixabay.com/api/';
+  const params = new URLSearchParams({
     key: '42959666-b225ac6c9c40b570269fe0b4e',
-    q: [valueFromInput],
+    q: query,
     image_type: 'photo',
     orientation: 'horizontal',
     safesearch: true,
   });
 
-  showLoaderIcon();
+  const url = `${BASE_URL}?${params}`;
 
-  return fetch(`https://pixabay.com/api/?${searchParams}`).then(response => {
+  return fetch(url).then(response => {
     if (!response.ok) {
       throw new Error(response.status);
     }

@@ -6,50 +6,52 @@ import 'izitoast/dist/css/iziToast.min.css';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const form = document.querySelector('.search-form');
-export const inputSearch = form.elements.search;
 export const listOfGallery = document.querySelector('.gallery');
 export const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 300,
 });
-const loader = document.querySelector('.loader');
-loader.style.display = 'none';
-export const showLoaderIcon = () => {
-  loader.style.display = 'flex';
-};
-const unshowLoaderIcon = () => {
-  loader.style.display = 'none';
-};
 
+const preloader = document.querySelector('.loader');
+function showLoader() {
+  preloader.classList.remove('is-hidden');
+}
+function hideLoader() {
+  preloader.classList.add('is-hidden');
+}
 form.addEventListener('submit', searchImages);
 
 function searchImages(event) {
   event.preventDefault();
+  showLoader();
   listOfGallery.innerHTML = '';
-
-  const input = event.target.elements.search.value.trim();
-  if (input !== '') {
-    window.onload = () => {
-      fetchImagesFromPixabay()
-        .then(images => {
-          renderImages(images.hits);
-          unshowLoaderIcon();
-        })
-        .catch(error => {
-          console.log(error);
-          unshowLoaderIcon();
-          iziToast.error({
-            message:
-              'Sorry, an error occurred while loading. Please try again!',
-            position: 'topRight',
-            icon: null,
-            backgroundColor: '#ef4040',
-            titleColor: '#fff',
-            messageColor: '#fff',
-          });
+  const inputValue = event.target.elements.search.value.trim();
+  if (inputValue !== '') {
+    fetchImagesFromPixabay(inputValue)
+      .then(resolve => {
+        renderImages(resolve.hits);
+        hideLoader();
+        form.reset();
+      })
+      .catch(error => {
+        console.log(error);
+        iziToast.error({
+          message: 'Sorry, an error occurred while loading. Please try again!',
+          theme: 'dark',
+          progressBarColor: '#FFFFFF',
+          color: '#EF4040',
+          position: 'topRight',
         });
-    };
-    window.onload();
-    form.reset();
+        hideLoader();
+      });
+  } else {
+    iziToast.show({
+      message: 'Please complete the field!',
+      theme: 'dark',
+      progressBarColor: '#FFFFFF',
+      color: '#EF4040',
+      position: 'topRight',
+    });
+    hideLoader();
   }
 }
