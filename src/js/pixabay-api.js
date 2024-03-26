@@ -1,7 +1,8 @@
-export function fetchImagesFromPixabay(query) {
+export function fetchImagesFromPixabay() {
+  const valueFromInput = inputSearch.value.trim().split(',').join('+');
   const searchParams = new URLSearchParams({
     key: '42959666-b225ac6c9c40b570269fe0b4e',
-    q: query.split(',').join('+'),
+    q: [valueFromInput],
     image_type: 'photo',
     orientation: 'horizontal',
     safesearch: true,
@@ -9,7 +10,7 @@ export function fetchImagesFromPixabay(query) {
 
   return fetch(`https://pixabay.com/api/?${searchParams}`).then(response => {
     if (!response.ok) {
-      throw new Error(response.statusText);
+      throw new Error(response.status);
     }
     return response.json();
   });
